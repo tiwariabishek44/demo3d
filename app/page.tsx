@@ -8,12 +8,12 @@ export default function Home() {
       <Navbar />
 
       {/* 
-        This container is 4000vh tall to allow for a long, buttery smooth scroll experience.
-        (Increased from 500vh to slow the sequence progression speed down to ~0.125x).
+        This container is 10000vh tall to allow for a long, buttery smooth scroll experience.
+        (Increased from 500vh to slow the sequence progression speed down to ~0.05x).
         The SequenceCanvas is position: sticky, so it stays fixed to the viewport as we scroll 
         through this tall container.
       */}
-      <div className="relative h-[4000vh] w-full">
+      <div className="relative h-[10000vh] w-full">
         {/* Sticky Canvas rendering the animation */}
         <SequenceCanvas />
 
