@@ -5,14 +5,12 @@ import ScrollTextLayers from "@/components/ScrollTextLayers";
 export default function Home() {
   return (
     <main className="relative bg-[#F5F5F7] min-h-screen">
-      <Navbar />
-
       {/* 
-        This container is 500vh tall to allow for a long, buttery smooth scroll experience.
+        This container is 550vh tall to allow for a long, buttery smooth scroll experience.
         The SequenceCanvas is position: sticky, so it stays fixed to the viewport as we scroll 
         through this tall container.
       */}
-      <div className="relative h-[500vh] w-full">
+      <div className="relative h-[550vh] w-full">
         {/* Sticky Canvas rendering the animation */}
         <SequenceCanvas />
 
