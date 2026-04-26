@@ -1,0 +1,28 @@
+import Navbar from "@/components/Navbar";
+import SequenceCanvas from "@/components/SequenceCanvas";
+import ScrollTextLayers from "@/components/ScrollTextLayers";
+
+export default function Home() {
+  return (
+    <main className="relative bg-[#F5F5F7] min-h-screen">
+      <Navbar />
+
+      {/* 
+        This container is 4000vh tall to allow for a long, buttery smooth scroll experience.
+        (Increased from 500vh to slow the sequence progression speed down to ~0.125x).
+        The SequenceCanvas is position: sticky, so it stays fixed to the viewport as we scroll 
+        through this tall container.
+      */}
+      <div className="relative h-[4000vh] w-full">
+        {/* Sticky Canvas rendering the animation */}
+        <SequenceCanvas />
+
+        {/* Scroll-linked text layers that fade in and out based on overall scroll progress */}
+        <ScrollTextLayers />
+      </div>
+
+      {/* Optional: Add a footer or next section below the 500vh container if desired 
+          For now, ending with the CTA is perfect. */}
+    </main>
+  );
+}
