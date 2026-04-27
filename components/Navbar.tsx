@@ -43,16 +43,16 @@ export default function Navbar({ onLogoClick }: NavbarProps) {
                               <button
                                     type="button"
                                     onClick={onLogoClick}
-                                    className="text-[#1D1D1F] text-[17px] font-semibold tracking-tight hover:opacity-70 transition-opacity"
+                                    className="hover:opacity-70 transition-opacity"
                               >
-                                    Rock-100xmag
+                                    <img src="/Rock_logo-scaled.jpg" alt="Rocktech" className="h-8 md:h-10 w-auto object-contain" />
                               </button>
                         ) : (
                               <Link
                                     href="/"
-                                    className="text-[#1D1D1F] text-[17px] font-semibold tracking-tight hover:opacity-70 transition-opacity"
+                                    className="hover:opacity-70 transition-opacity"
                               >
-                                    Rock-100xmag
+                                    <img src="/Rock_logo-scaled.jpg" alt="Rocktech" className="h-8 md:h-10 w-auto object-contain" />
                               </Link>
                         )}
                   </div>

@@ -1,42 +1,45 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { useParams, useRouter } from "next/navigation";
 import { ArrowLeft, ShoppingBag, Star } from "lucide-react";
 
 import Navbar from "@/components/Navbar";
+import { PRODUCTS } from "@/lib/data";
+
+// Fallback static elements for missing JSON data to keep the rich UI
 import {
-  calculateDiscount,
-  finishes,
-  formatPrice,
-  galleryFrames,
-  productDescription,
-  productName,
-  productSubtitle,
   quickFacts,
-  rating,
-  reviewCount,
+  galleryFrames,
 } from "@/lib/product";
 
 export default function ProductPage() {
-  const [selectedFinish, setSelectedFinish] = useState(finishes[0]);
-  const [selectedFrame, setSelectedFrame] = useState(galleryFrames[0]);
+  const params = useParams();
+  const router = useRouter();
+  const id = params?.id as string;
+
+  // Find product dynamically
+  const product = PRODUCTS.find((p) => p.id === id) || PRODUCTS[0];
+
+  const baseImage = product.images.length > 0 ? product.images[0] : galleryFrames[0];
+  const images = [baseImage, baseImage, baseImage, baseImage]; // Duplicate to show thumbnails
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
 
-  const discount = calculateDiscount(selectedFinish.price, selectedFinish.originalPrice);
+  const ratingValue = parseFloat(product.rating || "0") || 0;
 
   return (
     <main className="relative min-h-screen bg-white">
       <Navbar />
 
       <div className="mx-auto max-w-7xl px-6 pt-28 md:pt-32">
-        <Link
-          href="/"
+        <button
+          onClick={() => router.back()}
           className="inline-flex items-center gap-2 text-sm font-medium text-[#6E6E73] transition-colors hover:text-[#1D1D1F]"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to story
-        </Link>
+          Back to store
+        </button>
       </div>
 
       <section className="mx-auto max-w-7xl px-6 py-10 md:py-14">
@@ -44,51 +47,51 @@ export default function ProductPage() {
           {/* Gallery */}
           <div className="space-y-4">
             <div
-              key={selectedFrame}
-              className="relative aspect-square overflow-hidden rounded-3xl bg-[#F5F5F7]"
+              key={selectedIndex}
+              className="relative aspect-square overflow-hidden rounded-3xl bg-[#F5F5F7] p-8"
             >
               <img
-                src={selectedFrame}
-                alt={productName}
-                className="absolute inset-0 h-full w-full object-cover"
+                src={images[selectedIndex]}
+                alt={product.name}
+                className="absolute inset-0 h-full w-full object-contain p-8"
               />
               <div
                 className="pointer-events-none absolute inset-0"
                 style={{
-                  background: `radial-gradient(circle at center, ${selectedFinish.accent}22, transparent 60%)`,
+                  background: `radial-gradient(circle at center, #0050FF11, transparent 60%)`,
                 }}
               />
             </div>
-            <div className="grid grid-cols-4 gap-3">
-              {galleryFrames.map((frame) => {
-                const isActive = frame === selectedFrame;
-                return (
-                  <button
-                    key={frame}
-                    type="button"
-                    onClick={() => setSelectedFrame(frame)}
-                    aria-label="View product angle"
-                    className={`aspect-square overflow-hidden rounded-2xl border-2 bg-[#F5F5F7] transition-all ${
-                      isActive
+            {images.length > 1 && (
+              <div className="grid grid-cols-4 gap-3">
+                {images.map((frame, idx) => {
+                  const isActive = idx === selectedIndex;
+                  return (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => setSelectedIndex(idx)}
+                      aria-label={`View product angle ${idx + 1}`}
+                      className={`aspect-square overflow-hidden rounded-2xl border-2 bg-[#F5F5F7] transition-all p-2 ${isActive
                         ? "border-[#0050FF] shadow-[0_8px_20px_rgba(0,80,255,0.18)]"
                         : "border-transparent hover:border-black/10"
-                    }`}
-                  >
-                    <img src={frame} alt="" className="h-full w-full object-cover" />
-                  </button>
-                );
-              })}
-            </div>
+                        }`}
+                    >
+                      <img src={frame} alt="" className="h-full w-full object-contain" />
+                    </button>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           {/* Commerce */}
           <div className="flex flex-col gap-6">
             <div>
-              <p className="text-xs uppercase tracking-[0.35em] text-[#6E6E73]">Rock-100xmag</p>
+              <p className="text-xs uppercase tracking-[0.35em] text-[#6E6E73]">{product.category}</p>
               <h1 className="mt-3 text-4xl font-semibold tracking-tight text-[#1D1D1F] md:text-5xl">
-                {productName}
+                {product.name}
               </h1>
-              <p className="mt-2 text-sm font-medium text-[#0050FF]">{productSubtitle}</p>
             </div>
 
             <div className="flex flex-wrap items-center gap-3">
@@ -96,69 +99,48 @@ export default function ProductPage() {
                 {[1, 2, 3, 4, 5].map((i) => (
                   <Star
                     key={i}
-                    className={`h-4 w-4 ${
-                      i <= Math.round(rating)
-                        ? "fill-[#FFB800] text-[#FFB800]"
-                        : "fill-[#E5E5EA] text-[#E5E5EA]"
-                    }`}
+                    className={`h-4 w-4 ${i <= Math.round(ratingValue)
+                      ? "fill-[#FFB800] text-[#FFB800]"
+                      : "fill-[#E5E5EA] text-[#E5E5EA]"
+                      }`}
                   />
                 ))}
               </div>
-              <span className="text-sm font-semibold text-[#1D1D1F]">{rating}</span>
-              <span className="text-sm text-[#6E6E73]">·</span>
-              <span className="text-sm text-[#6E6E73]">{reviewCount} reviews</span>
+              <span className="text-sm font-semibold text-[#1D1D1F]">{product.rating}</span>
             </div>
 
             <div className="flex flex-wrap items-baseline gap-3">
               <p className="text-4xl font-semibold tabular-nums text-[#1D1D1F]">
-                {formatPrice(selectedFinish.price)}
+                {product.price.current}
               </p>
-              <p className="text-xl tabular-nums text-[#6E6E73] line-through">
-                {formatPrice(selectedFinish.originalPrice)}
-              </p>
-              {discount > 0 && (
+              {product.price.original && product.price.original !== product.price.current && product.price.original !== "N/A" && (
+                <p className="text-xl tabular-nums text-[#6E6E73] line-through">
+                  {product.price.original}
+                </p>
+              )}
+              {product.price.discount && product.price.discount !== "0%" && (
                 <span className="inline-flex items-center rounded-full bg-[#0050FF]/10 px-3 py-1 text-xs font-semibold tracking-wider text-[#0050FF]">
-                  Save {discount}%
+                  Save {product.price.discount}
                 </span>
               )}
             </div>
 
-            <p className="text-base leading-relaxed text-[#4A4A4A]">{productDescription}</p>
-
-            <div>
-              <p className="text-[11px] uppercase tracking-[0.3em] text-[#6E6E73]">
-                Color: <span className="font-semibold text-[#1D1D1F]">{selectedFinish.name}</span>
-              </p>
-              <div className="mt-3 flex flex-wrap gap-3">
-                {finishes.map((finish) => {
-                  const isActive = finish.key === selectedFinish.key;
-                  return (
-                    <button
-                      key={finish.key}
-                      type="button"
-                      onClick={() => setSelectedFinish(finish)}
-                      aria-label={`Select ${finish.name}`}
-                      className="group flex items-center gap-2 rounded-full border border-black/[0.08] bg-white px-3 py-2 text-left transition-all duration-300 hover:-translate-y-0.5 hover:border-black/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0050FF]/40"
-                    >
-                      <span
-                        className="block h-7 w-7 rounded-full border transition-all"
-                        style={{
-                          background:
-                            finish.name === "Arctic White"
-                              ? "linear-gradient(135deg, #f5f6f8 0%, #a3adb7 100%)"
-                              : `linear-gradient(135deg, ${finish.accent} 0%, #1D1D1F 100%)`,
-                          borderColor: isActive ? "#0050FF" : "rgba(0,0,0,0.08)",
-                          boxShadow: isActive ? "0 0 0 2px #0050FF44" : "none",
-                        }}
-                      />
-                      <span className="text-sm font-medium text-[#1D1D1F]">{finish.name}</span>
-                    </button>
-                  );
-                })}
+            {/* Dynamic Technical Specs rendering if available */}
+            {product.technical_specs && (
+              <div className="space-y-2 mt-4 text-sm text-[#4A4A4A]">
+                <h4 className="font-semibold text-black uppercase tracking-widest text-[11px] mb-3">Technical Specs</h4>
+                <ul className="space-y-3 border-l-2 border-black/5 pl-4">
+                  {Object.entries(product.technical_specs).map(([key, value]) => (
+                    <li key={key}>
+                      <span className="font-semibold capitalize text-[#1D1D1F]">{key.replace('_', ' ')}: </span>
+                      <span className="text-[#6E6E73]">{String(value)}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </div>
+            )}
 
-            <div className="flex flex-wrap items-stretch gap-3">
+            <div className="flex flex-wrap items-stretch gap-3 mt-6">
               <div className="flex items-center gap-1 rounded-full border border-black/[0.08] bg-white p-1">
                 <button
                   type="button"
@@ -199,10 +181,10 @@ export default function ProductPage() {
 
             <div className="space-y-2 border-t border-black/[0.06] pt-5 text-sm text-[#6E6E73]">
               <p>
-                <span className="font-medium text-[#1D1D1F]">{selectedFinish.delivery}</span> delivery · SKU{" "}
-                <span className="tabular-nums">{selectedFinish.sku}</span>
+                <span className="font-medium text-[#1D1D1F]">2-3 business days</span> delivery · SKU{" "}
+                <span className="tabular-nums">RCK-{product.id.padStart(4, '0')}</span>
               </p>
-              <p>Free engraving · 14-day returns · 1-year warranty</p>
+              <p>Free delivery · 14-day returns · 1-year warranty</p>
             </div>
           </div>
         </div>
