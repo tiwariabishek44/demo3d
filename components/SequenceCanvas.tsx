@@ -60,7 +60,7 @@ export default function SequenceCanvas() {
             }
 
             // Match the background perfectly
-            ctx.fillStyle = "#F5F5F7";
+            ctx.fillStyle = "#FFFFFF";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
@@ -105,7 +105,7 @@ export default function SequenceCanvas() {
       }, []);
 
       return (
-            <div className="sticky top-0 left-0 w-full h-screen overflow-hidden bg-[#F5F5F7] z-0">
+            <div className="sticky top-0 left-0 w-full h-screen overflow-hidden bg-[#FFFFFF] z-0">
                   <canvas
                         ref={canvasRef}
                         className="w-full h-full block"
