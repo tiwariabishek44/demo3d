@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import SequenceCanvas from "@/components/SequenceCanvas";
 import ScrollTextLayers from "@/components/ScrollTextLayers";
+import ProductListing from "@/components/ProductListing";
 
 export default function Home() {
   return (
@@ -19,6 +20,8 @@ export default function Home() {
         {/* Scroll-linked text layers that fade in and out based on overall scroll progress */}
         <ScrollTextLayers />
       </div>
+
+      <ProductListing />
 
       {/* Optional: Add a footer or next section below the 660vh container if desired 
           For now, ending with the CTA is perfect. */}

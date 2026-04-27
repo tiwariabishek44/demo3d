@@ -33,7 +33,7 @@ export default function Navbar() {
                   {/* Left: Logo */}
                   <div className="flex-1">
                         <h1 className="text-[#1D1D1F] text-lg font-bold tracking-tight">
-                              WH-1000XM6
+                              Rock-100xmag
                         </h1>
                   </div>
 
@@ -49,7 +49,7 @@ export default function Navbar() {
                   <div className="flex flex-1 justify-end">
                         <div className="rounded-full bg-gradient-to-r from-[#0050FF] to-[#00AEEF] p-[1px] hover:-translate-y-[1px] transition-all duration-300 hover:shadow-[0_4px_15px_rgba(0,80,255,0.15)]">
                               <button className="px-5 py-2 rounded-full font-medium text-sm bg-white text-[#1D1D1F] hover:bg-slate-50 transition-colors block w-full h-full">
-                                    Experience WH-1000XM6
+                                    Experience Rock-100xmag
                               </button>
                         </div>
                   </div>
