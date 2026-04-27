@@ -1,22 +1,30 @@
 "use client";
 
+import type { RefObject } from "react";
 import { useEffect, useRef, useState } from "react";
 import { useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 
 const FRAME_COUNT = 240;
+
+type SequenceCanvasProps = {
+      scrollTargetRef: RefObject<HTMLElement | null>;
+};
 
 function currentFrame(index: number) {
       const paddedIndex = index.toString().padStart(3, "0");
       return `/headphones/ezgif-frame-${paddedIndex}.jpg`;
 }
 
-export default function SequenceCanvas() {
+export default function SequenceCanvas({ scrollTargetRef }: SequenceCanvasProps) {
       const canvasRef = useRef<HTMLCanvasElement>(null);
       const imagesRef = useRef<HTMLImageElement[]>([]);
       const [isLoaded, setIsLoaded] = useState(false);
 
-      // Track scroll position of the entire page
-      const { scrollYProgress } = useScroll();
+      // Track scroll progress within the canvas section only.
+      const { scrollYProgress } = useScroll({
+            target: scrollTargetRef,
+            offset: ["start start", "end start"],
+      });
 
       // Map scroll progress (0-1) to frame index (1-240)
       const frameIndex = useTransform(scrollYProgress, [0, 1], [1, FRAME_COUNT]);

@@ -1,8 +1,13 @@
 "use client";
 
+import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-export default function Navbar() {
+type NavbarProps = {
+      onLogoClick?: () => void;
+};
+
+export default function Navbar({ onLogoClick }: NavbarProps) {
       const { scrollY } = useScroll();
       const background = useTransform(
             scrollY,
@@ -32,9 +37,22 @@ export default function Navbar() {
             >
                   {/* Left: Logo */}
                   <div className="flex-1">
-                        <h1 className="text-[#1D1D1F] text-lg font-bold tracking-tight">
-                              Rock-100xmag
-                        </h1>
+                        {onLogoClick ? (
+                              <button
+                                    type="button"
+                                    onClick={onLogoClick}
+                                    className="text-[#1D1D1F] text-lg font-bold tracking-tight text-left"
+                              >
+                                    Rock-100xmag
+                              </button>
+                        ) : (
+                              <Link
+                                    href="/"
+                                    className="text-[#1D1D1F] text-lg font-bold tracking-tight text-left"
+                              >
+                                    Rock-100xmag
+                              </Link>
+                        )}
                   </div>
 
                   {/* Center: Links */}
@@ -47,11 +65,14 @@ export default function Navbar() {
 
                   {/* Right: CTA */}
                   <div className="flex flex-1 justify-end">
-                        <div className="rounded-full bg-gradient-to-r from-[#0050FF] to-[#00AEEF] p-[1px] hover:-translate-y-[1px] transition-all duration-300 hover:shadow-[0_4px_15px_rgba(0,80,255,0.15)]">
-                              <button className="px-5 py-2 rounded-full font-medium text-sm bg-white text-[#1D1D1F] hover:bg-slate-50 transition-colors block w-full h-full">
+                        <Link
+                              href="/product"
+                              className="block rounded-full bg-linear-to-r from-[#0050FF] to-[#00AEEF] p-px hover:-translate-y-px transition-all duration-300 hover:shadow-[0_4px_15px_rgba(0,80,255,0.15)]"
+                        >
+                              <span className="block px-5 py-2 rounded-full font-medium text-sm bg-white text-[#1D1D1F] hover:bg-slate-50 transition-colors w-full h-full">
                                     Experience Rock-100xmag
-                              </button>
-                        </div>
+                              </span>
+                        </Link>
                   </div>
             </motion.nav>
       );
