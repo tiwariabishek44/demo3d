@@ -58,9 +58,9 @@ export default function Home() {
           className="pointer-events-none absolute inset-0 flex items-center justify-center"
         >
           <img
-            src="/headphones/ezgif-frame-001.jpg"
-            alt=""
-            className="h-[75vh] w-auto max-w-[85vw] object-contain"
+            src="/heroimage.png"
+            alt="Rock-100xmag Headphones"
+            className="h-full w-full object-cover"
           />
         </motion.div>
 
