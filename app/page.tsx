@@ -6,6 +6,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import ScrollTextLayers from "@/components/ScrollTextLayers";
 import SequenceCanvas from "@/components/SequenceCanvas";
+import ProductGrid from "@/components/ProductGrid";
+import ScrollIndicator from "@/components/ScrollIndicator";
 
 export default function Home() {
   const canvasSectionRef = useRef<HTMLDivElement>(null);
@@ -51,7 +53,7 @@ export default function Home() {
           aria-hidden
           style={{ scale: silhouetteScale, filter: silhouetteBlur }}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.25 }}
+          animate={{ opacity: 0.45 }}
           transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
           className="pointer-events-none absolute inset-0 flex items-center justify-center"
         >
@@ -114,6 +116,13 @@ export default function Home() {
             />
           </div>
         </motion.div>
+        {/* Scroll Indicator — Fades out quickly as discovery begins. */}
+        <motion.div
+          style={{ opacity: useTransform(globalScrollY, [0, 0.02], [1, 0]) }}
+          className="absolute bottom-12 left-1/2 -translate-x-1/2"
+        >
+          <ScrollIndicator />
+        </motion.div>
       </motion.section>
 
       {/*
@@ -123,6 +132,8 @@ export default function Home() {
         <SequenceCanvas scrollTargetRef={canvasSectionRef} />
         <ScrollTextLayers scrollTargetRef={canvasSectionRef} />
       </div>
+
+      <ProductGrid />
     </main>
   );
 }

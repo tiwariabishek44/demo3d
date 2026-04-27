@@ -16,11 +16,11 @@ export default function ScrollTextLayers({ scrollTargetRef }: ScrollTextLayersPr
       // Engineering starts after a small delay so the canvas has a beat of breathing room
       // as the dedicated hero scrolls off; fade windows are tightened (0.03 wide instead of
       // 0.05) so transitions between beats feel snappier.
-      const opacityEngineering = useTransform(scrollYProgress, [0.05, 0.08, 0.27, 0.3], [0, 1, 1, 0]);
-      const yEngineering = useTransform(scrollYProgress, [0.05, 0.08], [50, 0]);
+      const opacityEngineering = useTransform(scrollYProgress, [0.0, 0.03, 0.27, 0.3], [0, 1, 1, 0]);
+      const yEngineering = useTransform(scrollYProgress, [0.0, 0.03], [50, 0]);
       // Headline color settles from a clearly-readable gray into near-black, so the slogan
       // softens its entrance without becoming invisible against the canvas background.
-      const colorEngineering = useTransform(scrollYProgress, [0.05, 0.12], ["#6E6E73", "#1D1D1F"]);
+      const colorEngineering = useTransform(scrollYProgress, [0.0, 0.12], ["#6E6E73", "#1D1D1F"]);
 
       const opacityNoise = useTransform(scrollYProgress, [0.3, 0.33, 0.52, 0.55], [0, 1, 1, 0]);
       const yNoise = useTransform(scrollYProgress, [0.3, 0.33], [50, 0]);
@@ -28,16 +28,16 @@ export default function ScrollTextLayers({ scrollTargetRef }: ScrollTextLayersPr
       const opacitySound = useTransform(scrollYProgress, [0.55, 0.58, 0.77, 0.8], [0, 1, 1, 0]);
       const ySound = useTransform(scrollYProgress, [0.55, 0.58], [50, 0]);
 
-      const opacityEnd = useTransform(scrollYProgress, [0.8, 0.83, 1], [0, 1, 1]);
-      const yEnd = useTransform(scrollYProgress, [0.8, 0.83], [50, 0]);
-      const pointerEnd = useTransform(scrollYProgress, (v) => (v > 0.82 ? "auto" : "none"));
+      const opacityEnd = useTransform(scrollYProgress, [0.8, 0.83, 0.95, 1], [0, 1, 1, 0]);
+      const yEnd = useTransform(scrollYProgress, [0.8, 0.83, 0.95, 1], [50, 0, 0, -300]);
+      const pointerEnd = useTransform(scrollYProgress, (v) => (v > 0.82 && v < 0.98 ? "auto" : "none"));
 
       return (
             <>
                   {/* 1. Engineering Reveal */}
                   <motion.div
                         style={{ opacity: opacityEngineering, y: yEngineering }}
-                        className="fixed inset-0 pointer-events-none z-10 flex items-center justify-start px-8 md:px-24"
+                        className="sticky top-0 h-screen w-full pointer-events-none z-10 flex items-center justify-start px-8 md:px-24"
                   >
                         <div className="max-w-xl">
                               <p className="mb-8 text-xs font-bold uppercase tracking-[0.5em] text-[#6E6E73]/80">
@@ -61,7 +61,7 @@ export default function ScrollTextLayers({ scrollTargetRef }: ScrollTextLayersPr
                   {/* 2. Noise Cancelling */}
                   <motion.div
                         style={{ opacity: opacityNoise, y: yNoise }}
-                        className="fixed inset-0 pointer-events-none z-10 flex items-center justify-end px-8 md:px-24 text-right"
+                        className="sticky top-0 h-screen w-full pointer-events-none z-10 flex items-center justify-end px-8 md:px-24 text-right"
                   >
                         <div className="max-w-xl ml-auto">
                               <p className="mb-8 text-xs font-bold uppercase tracking-[0.5em] text-[#6E6E73]/80">
@@ -84,7 +84,7 @@ export default function ScrollTextLayers({ scrollTargetRef }: ScrollTextLayersPr
                   {/* 3. Sound & Upscaling */}
                   <motion.div
                         style={{ opacity: opacitySound, y: ySound }}
-                        className="fixed inset-0 pointer-events-none z-10 flex items-center justify-start px-8 md:px-24"
+                        className="sticky top-0 h-screen w-full pointer-events-none z-10 flex items-center justify-start px-8 md:px-24"
                   >
                         <div className="max-w-xl">
                               <p className="mb-8 text-xs font-bold uppercase tracking-[0.5em] text-[#6E6E73]/80">
@@ -105,7 +105,7 @@ export default function ScrollTextLayers({ scrollTargetRef }: ScrollTextLayersPr
                   {/* 4. Closing CTA */}
                   <motion.div
                         style={{ opacity: opacityEnd, y: yEnd, pointerEvents: pointerEnd as any }}
-                        className="fixed inset-0 z-20 flex flex-col items-center justify-center bg-transparent backdrop-blur-[2px] transition-all duration-700 pb-20"
+                        className="sticky top-0 h-screen w-full z-20 flex flex-col items-center justify-center bg-transparent backdrop-blur-[2px] transition-all duration-700 pb-20"
                   >
                         <div className="absolute inset-0 bg-linear-to-t from-[#F5F5F7] via-[#F5F5F7]/80 to-transparent opacity-100 -z-10"></div>
                         <div className="mt-[40vh] flex flex-col items-center text-center px-6 relative z-10">

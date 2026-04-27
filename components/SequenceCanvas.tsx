@@ -2,7 +2,7 @@
 
 import type { RefObject } from "react";
 import { useEffect, useRef, useState } from "react";
-import { useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 
 const FRAME_COUNT = 240;
 
@@ -112,12 +112,19 @@ export default function SequenceCanvas({ scrollTargetRef }: SequenceCanvasProps)
             return () => window.removeEventListener("resize", handleResize);
       }, []);
 
+      // Fade out and lift the entire canvas container at the very end
+      const containerOpacity = useTransform(scrollYProgress, [0.97, 1], [1, 0]);
+      const containerY = useTransform(scrollYProgress, [0.93, 1], [0, -150]);
+
       return (
-            <div className="sticky top-0 left-0 w-full h-screen overflow-hidden bg-[#FFFFFF] z-0">
+            <motion.div
+                  style={{ opacity: containerOpacity, y: containerY }}
+                  className="sticky top-0 left-0 w-full h-screen overflow-hidden bg-[#FFFFFF] z-0"
+            >
                   <canvas
                         ref={canvasRef}
                         className="w-full h-full block"
                   />
-            </div>
+            </motion.div>
       );
 }
