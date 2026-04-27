@@ -8,11 +8,11 @@ export default function Home() {
       <Navbar />
 
       {/* 
-        This container is 600vh tall to allow for a long, buttery smooth scroll experience.
+        This container is 660vh tall to allow for a long, buttery smooth scroll experience.
         The SequenceCanvas is position: sticky, so it stays fixed to the viewport as we scroll 
         through this tall container.
       */}
-      <div className="relative h-[600vh] w-full">
+      <div className="relative h-[660vh] w-full">
         {/* Sticky Canvas rendering the animation */}
         <SequenceCanvas />
 
@@ -20,7 +20,7 @@ export default function Home() {
         <ScrollTextLayers />
       </div>
 
-      {/* Optional: Add a footer or next section below the 500vh container if desired 
+      {/* Optional: Add a footer or next section below the 660vh container if desired 
           For now, ending with the CTA is perfect. */}
     </main>
   );
