@@ -39,92 +39,101 @@ export default function ScrollTextLayers({ scrollTargetRef }: ScrollTextLayersPr
                         style={{ opacity: opacityEngineering, y: yEngineering }}
                         className="fixed inset-0 pointer-events-none z-10 flex items-center justify-start px-8 md:px-24"
                   >
-                        <div className="max-w-md">
+                        <div className="max-w-xl">
+                              <p className="mb-8 text-xs font-bold uppercase tracking-[0.5em] text-[#6E6E73]/80">
+                                    Acoustic engineering
+                              </p>
                               <motion.h3
                                     style={{ color: colorEngineering }}
-                                    className="text-3xl md:text-5xl font-bold tracking-tight mb-6 leading-tight"
+                                    className="mb-8 text-5xl md:text-7xl font-bold tracking-tighter leading-[0.95]"
                               >
                                     Precision-engineered <br />
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1D1D1F] to-[#0050FF]">
+                                    <span className="text-transparent bg-clip-text bg-linear-to-b from-[#1D1D1F] to-[#424245]">
                                           for silence.
                                     </span>
                               </motion.h3>
-                              <div className="space-y-4">
-                                    <p className="text-lg text-[#424245] leading-relaxed font-light">
-                                          Custom drivers, sealed acoustic chambers, and optimized airflow deliver studio-grade clarity.
-                                    </p>
-                                    <p className="text-lg text-[#424245] leading-relaxed font-light">
-                                          Every component is tuned for balance, power, and comfort—hour after hour.
-                                    </p>
-                              </div>
+                              <p className="max-w-lg text-lg md:text-xl text-[#4A4A4A] font-light leading-relaxed">
+                                    Custom drivers, sealed acoustic chambers, and optimised airflow deliver studio-grade clarity—tuned for balance, power, and comfort, hour after hour.
+                              </p>
                         </div>
                   </motion.div>
 
-                  {/* 3. Noise Cancelling */}
+                  {/* 2. Noise Cancelling */}
                   <motion.div
                         style={{ opacity: opacityNoise, y: yNoise }}
                         className="fixed inset-0 pointer-events-none z-10 flex items-center justify-end px-8 md:px-24 text-right"
                   >
-                        <div className="max-w-md ml-auto">
-                              <h3 className="text-3xl md:text-5xl font-bold tracking-tight text-[#1D1D1F] mb-6 leading-tight">
-                                    Adaptive noise <br />
-                                    cancelling, <span className="text-[#0050FF]">redefined.</span>
+                        <div className="max-w-xl ml-auto">
+                              <p className="mb-8 text-xs font-bold uppercase tracking-[0.5em] text-[#6E6E73]/80">
+                                    Adaptive noise cancelling
+                              </p>
+                              <h3 className="mb-8 text-5xl md:text-7xl font-bold tracking-tighter text-[#1D1D1F] leading-[0.95]">
+                                    Silence, <br />
+                                    <span className="text-transparent bg-clip-text bg-linear-to-b from-[#1D1D1F] to-[#0050FF]">
+                                          redefined.
+                                    </span>
                               </h3>
-                              <ul className="space-y-4 text-lg text-[#424245] font-light list-none">
-                                    <li>Multi-microphone array listens in every direction.</li>
-                                    <li>Real-time noise analysis adjusts to your environment.</li>
-                                    <li>Your music stays pure—planes, trains, and crowds fade away.</li>
+                              <ul className="space-y-4 text-lg md:text-xl text-[#4A4A4A] font-light leading-relaxed list-none">
+                                    <li>A multi-microphone array listens in every direction.</li>
+                                    <li>Real-time analysis adapts to your environment.</li>
+                                    <li>Planes, trains, and crowds quietly fade away.</li>
                               </ul>
                         </div>
                   </motion.div>
 
-                  {/* 4. Sound & Upscaling */}
+                  {/* 3. Sound & Upscaling */}
                   <motion.div
                         style={{ opacity: opacitySound, y: ySound }}
                         className="fixed inset-0 pointer-events-none z-10 flex items-center justify-start px-8 md:px-24"
                   >
-                        <div className="max-w-md">
-                              <h3 className="text-3xl md:text-5xl font-bold tracking-tight text-[#1D1D1F] mb-6 leading-tight">
+                        <div className="max-w-xl">
+                              <p className="mb-8 text-xs font-bold uppercase tracking-[0.5em] text-[#6E6E73]/80">
+                                    Lifelike audio
+                              </p>
+                              <h3 className="mb-8 text-5xl md:text-7xl font-bold tracking-tighter text-[#1D1D1F] leading-[0.95]">
                                     Immersive, <br />
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#0050FF] to-[#1D1D1F]">
+                                    <span className="text-transparent bg-clip-text bg-linear-to-b from-[#1D1D1F] to-[#424245]">
                                           lifelike sound.
                                     </span>
                               </h3>
-                              <div className="space-y-4">
-                                    <p className="text-lg text-[#424245] leading-relaxed font-light">
-                                          High-performance drivers unlock detail, depth, and texture in every track.
-                                    </p>
-                                    <p className="text-lg text-[#424245] leading-relaxed font-light">
-                                          AI-enhanced upscaling restores clarity to compressed audio, so every note feels alive.
-                                    </p>
-                              </div>
+                              <p className="max-w-lg text-lg md:text-xl text-[#4A4A4A] font-light leading-relaxed">
+                                    High-performance drivers reveal detail, depth, and texture in every track. AI upscaling restores clarity to compressed audio—every note alive.
+                              </p>
                         </div>
                   </motion.div>
 
-                  {/* 5. Reassembly & CTA */}
+                  {/* 4. Closing CTA */}
                   <motion.div
                         style={{ opacity: opacityEnd, y: yEnd, pointerEvents: pointerEnd as any }}
                         className="fixed inset-0 z-20 flex flex-col items-center justify-center bg-transparent backdrop-blur-[2px] transition-all duration-700 pb-20"
                   >
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#F5F5F7] via-[#F5F5F7]/80 to-transparent opacity-100 -z-10"></div>
-                        <div className="mt-[40vh] flex flex-col items-center text-center px-4 relative z-10">
-                              <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-[#1D1D1F] mb-4">
-                                    Hear everything. Feel nothing else.
+                        <div className="absolute inset-0 bg-linear-to-t from-[#F5F5F7] via-[#F5F5F7]/80 to-transparent opacity-100 -z-10"></div>
+                        <div className="mt-[40vh] flex flex-col items-center text-center px-6 relative z-10">
+                              <p className="mb-8 text-xs font-bold uppercase tracking-[0.5em] text-[#6E6E73]/80">
+                                    Rock-100xmag
+                              </p>
+                              <h2 className="mb-8 text-6xl md:text-8xl font-bold tracking-tighter text-[#1D1D1F] leading-[0.9]">
+                                    Hear everything. <br />
+                                    <span className="text-transparent bg-clip-text bg-linear-to-b from-[#1D1D1F] to-[#424245]">
+                                          Feel nothing else.
+                                    </span>
                               </h2>
-                              <p className="text-xl md:text-2xl text-[#424245] font-medium mb-10">
-                                    WH‑1000XM6. Designed for focus, crafted for comfort.
+                              <p className="max-w-2xl text-xl md:text-2xl text-[#4A4A4A] font-light leading-relaxed mb-12">
+                                    Designed for focus, crafted for comfort.
                               </p>
 
-                              <div className="flex flex-col sm:flex-row items-center gap-6 mb-8 mt-4">
-                                    <button className="px-8 py-4 bg-[#1D1D1F] text-white font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(0,0,0,0.1)] pointer-events-auto">
-                                          Experience WH‑1000XM6
+                              <div className="flex flex-col sm:flex-row items-center gap-5 mb-10">
+                                    <button className="block rounded-full bg-linear-to-r from-[#0050FF] to-[#00AEEF] p-px hover:-translate-y-px transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,80,255,0.2)] pointer-events-auto">
+                                          <span className="block px-8 py-4 rounded-full font-medium text-base bg-[#1D1D1F] text-white">
+                                                Experience Rock-100xmag
+                                          </span>
                                     </button>
-                                    <button className="px-8 py-4 bg-transparent border border-[#1D1D1F]/20 text-[#1D1D1F] font-medium rounded-full hover:bg-black/5 transition-colors duration-300 pointer-events-auto">
+                                    <button className="px-8 py-4 bg-transparent border border-[#1D1D1F]/15 text-[#1D1D1F] font-medium text-base rounded-full hover:bg-[#1D1D1F]/5 transition-colors duration-300 pointer-events-auto">
                                           See full specs
                                     </button>
                               </div>
 
-                              <p className="text-sm text-[#424245]/60 tracking-wider uppercase font-medium">
+                              <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#6E6E73]/80">
                                     Engineered for airports, offices, and everything in between.
                               </p>
                         </div>

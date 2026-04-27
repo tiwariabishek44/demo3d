@@ -9,20 +9,22 @@ type NavbarProps = {
 
 export default function Navbar({ onLogoClick }: NavbarProps) {
       const { scrollY } = useScroll();
+
+      // Transition background and blur slightly later for a cleaner hero entrance
       const background = useTransform(
             scrollY,
-            [0, 50],
-            ["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 0.7)"]
+            [10, 100],
+            ["rgba(245, 245, 247, 0)", "rgba(245, 245, 247, 0.72)"]
       );
       const backdropFilter = useTransform(
             scrollY,
-            [0, 50],
-            ["blur(0px)", "blur(20px)"]
+            [10, 100],
+            ["blur(0px) saturate(100%)", "blur(20px) saturate(180%)"]
       );
       const borderColor = useTransform(
             scrollY,
-            [0, 50],
-            ["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 0.06)"]
+            [10, 100],
+            ["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 0.08)"]
       );
 
       return (
@@ -33,45 +35,43 @@ export default function Navbar({ onLogoClick }: NavbarProps) {
                         borderBottomWidth: 1,
                         borderColor,
                   }}
-                  className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 m-0 transition-all duration-300"
+                  className="fixed top-0 left-0 right-0 z-50 flex h-14 items-center justify-between px-6 md:px-12 transition-colors duration-500"
             >
-                  {/* Left: Logo */}
-                  <div className="flex-1">
+                  {/* Left: Logo - Leaner and more refined */}
+                  <div className="flex items-center">
                         {onLogoClick ? (
                               <button
                                     type="button"
                                     onClick={onLogoClick}
-                                    className="text-[#1D1D1F] text-lg font-bold tracking-tight text-left"
+                                    className="text-[#1D1D1F] text-[17px] font-semibold tracking-tight hover:opacity-70 transition-opacity"
                               >
                                     Rock-100xmag
                               </button>
                         ) : (
                               <Link
                                     href="/"
-                                    className="text-[#1D1D1F] text-lg font-bold tracking-tight text-left"
+                                    className="text-[#1D1D1F] text-[17px] font-semibold tracking-tight hover:opacity-70 transition-opacity"
                               >
                                     Rock-100xmag
                               </Link>
                         )}
                   </div>
 
-                  {/* Center: Links */}
-                  <div className="hidden md:flex flex-1 justify-center space-x-8 text-sm font-medium tracking-wide text-[#4A4A4A]">
-                        <a href="#overview" className="hover:text-[#1D1D1F] transition-colors">Overview</a>
-                        <a href="#technology" className="hover:text-[#1D1D1F] transition-colors">Technology</a>
-                        <a href="#noise-cancelling" className="hover:text-[#1D1D1F] transition-colors">Noise Cancelling</a>
-                        <a href="#specs" className="hover:text-[#1D1D1F] transition-colors">Specs</a>
+                  {/* Center: Links - Technical and precise typography */}
+                  <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center space-x-10 text-[17px] font-semibold tracking-tight text-[#4A4A4A]">
+                        <a href="#overview" className="hover:text-[#0050FF] transition-colors uppercase">Overview</a>
+                        <a href="#technology" className="hover:text-[#0050FF] transition-colors uppercase">Technology</a>
+                        <a href="#noise-cancelling" className="hover:text-[#0050FF] transition-colors uppercase">Noise Cancelling</a>
+                        <a href="#specs" className="hover:text-[#0050FF] transition-colors uppercase">Specs</a>
                   </div>
 
-                  {/* Right: CTA */}
-                  <div className="flex flex-1 justify-end">
+                  {/* Right: CTA - Compact and utility-focused */}
+                  <div className="flex items-center justify-end scale-90 md:scale-100">
                         <Link
                               href="/product"
-                              className="block rounded-full bg-linear-to-r from-[#0050FF] to-[#00AEEF] p-px hover:-translate-y-px transition-all duration-300 hover:shadow-[0_4px_15px_rgba(0,80,255,0.15)]"
+                              className="px-4 py-1.5 rounded-full bg-[#1D1D1F] text-white text-[17px] font-semibold tracking-tight hover:bg-[#424245] transition-colors shadow-sm"
                         >
-                              <span className="block px-5 py-2 rounded-full font-medium text-sm bg-white text-[#1D1D1F] hover:bg-slate-50 transition-colors w-full h-full">
-                                    Experience Rock-100xmag
-                              </span>
+                              Buy
                         </Link>
                   </div>
             </motion.nav>
