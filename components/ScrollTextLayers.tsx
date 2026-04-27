@@ -18,7 +18,7 @@ export default function ScrollTextLayers() {
       const opacitySound = useTransform(scrollYProgress, [0.65, 0.7, 0.8, 0.85], [0, 1, 1, 0]);
       const ySound = useTransform(scrollYProgress, [0.65, 0.7], [50, 0]);
 
-      const opacityEnd = useTransform(scrollYProgress, [0.85, 0.9, 0.95, 0.98], [0, 1, 1, 0]);
+      const opacityEnd = useTransform(scrollYProgress, [0.85, 0.9, 1], [0, 1, 1]);
       const yEnd = useTransform(scrollYProgress, [0.85, 0.9], [50, 0]);
       const pointerEnd = useTransform(scrollYProgress, (v) => (v > 0.88 ? "auto" : "none"));
 
@@ -27,7 +27,7 @@ export default function ScrollTextLayers() {
                   {/* 1. Hero / Intro */}
                   <motion.div
                         style={{ opacity: opacityHero, y: yHero }}
-                        className="sticky top-0 h-screen w-full pointer-events-none z-10 flex flex-col items-center justify-end pb-[10vh] md:pb-[15vh] px-6 text-center drop-shadow-[0_10px_30px_rgba(0,0,0,0.08)]"
+                        className="fixed inset-0 pointer-events-none z-10 flex flex-col items-center justify-end pb-[10vh] md:pb-[15vh] px-6 text-center drop-shadow-[0_10px_30px_rgba(0,0,0,0.08)]"
                   >
                         <h2 className="text-5xl md:text-7xl font-bold tracking-tight text-[#1D1D1F] mb-4">
                               Rock-100xmag
@@ -43,7 +43,7 @@ export default function ScrollTextLayers() {
                   {/* 2. Engineering Reveal */}
                   <motion.div
                         style={{ opacity: opacityEngineering, y: yEngineering }}
-                        className="sticky top-0 h-screen w-full pointer-events-none z-10 flex items-center justify-start px-8 md:px-24 drop-shadow-[0_10px_30px_rgba(0,0,0,0.08)]"
+                        className="fixed inset-0 pointer-events-none z-10 flex items-center justify-start px-8 md:px-24 drop-shadow-[0_10px_30px_rgba(0,0,0,0.08)]"
                   >
                         <div className="max-w-md">
                               <h3 className="text-4xl md:text-6xl font-bold tracking-tight text-[#1D1D1F] mb-6 leading-tight">
@@ -61,7 +61,7 @@ export default function ScrollTextLayers() {
                   {/* 3. Noise Cancelling */}
                   <motion.div
                         style={{ opacity: opacityNoise, y: yNoise }}
-                        className="sticky top-0 h-screen w-full pointer-events-none z-10 flex items-center justify-end px-8 md:px-24 text-right drop-shadow-[0_10px_30px_rgba(0,0,0,0.08)]"
+                        className="fixed inset-0 pointer-events-none z-10 flex items-center justify-end px-8 md:px-24 text-right drop-shadow-[0_10px_30px_rgba(0,0,0,0.08)]"
                   >
                         <div className="max-w-md ml-auto">
                               <h3 className="text-4xl md:text-6xl font-bold tracking-tight text-[#1D1D1F] mb-6 leading-tight">
@@ -79,7 +79,7 @@ export default function ScrollTextLayers() {
                   {/* 4. Sound & Upscaling */}
                   <motion.div
                         style={{ opacity: opacitySound, y: ySound }}
-                        className="sticky top-0 h-screen w-full pointer-events-none z-10 flex items-center justify-start px-8 md:px-24 drop-shadow-[0_10px_30px_rgba(0,0,0,0.08)]"
+                        className="fixed inset-0 pointer-events-none z-10 flex items-center justify-start px-8 md:px-24 drop-shadow-[0_10px_30px_rgba(0,0,0,0.08)]"
                   >
                         <div className="max-w-md">
                               <h3 className="text-4xl md:text-6xl font-bold tracking-tight text-[#1D1D1F] mb-6 leading-tight flex items-baseline gap-[1px]">
@@ -98,7 +98,7 @@ export default function ScrollTextLayers() {
                   {/* 5. Reassembly & CTA */}
                   <motion.div
                         style={{ opacity: opacityEnd, y: yEnd, pointerEvents: pointerEnd as any }}
-                        className="sticky top-0 h-screen w-full z-20 flex flex-col items-center justify-center bg-white/70 backdrop-blur-md transition-all duration-700 pb-20"
+                        className="fixed inset-0 z-20 flex flex-col items-center justify-center bg-white/70 backdrop-blur-md transition-all duration-700 pb-20"
                   >
                         <div className="mt-[30vh] flex flex-col items-center text-center px-4 relative z-10 drop-shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
                               <h2 className="text-5xl md:text-7xl font-bold tracking-tight text-[#1D1D1F] mb-4">
@@ -126,9 +126,9 @@ export default function ScrollTextLayers() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 1, duration: 1 }}
-                        className="sticky top-0 h-screen w-full z-50 pointer-events-none"
+                        className="fixed bottom-10 right-10 z-50 pointer-events-none"
                   >
-                        <div className="absolute bottom-10 right-10 px-4 py-2 bg-white/40 backdrop-blur-md rounded-full border border-black/5 shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
+                        <div className="px-4 py-2 bg-white/40 backdrop-blur-md rounded-full border border-black/5 shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
                               <span className="text-[#1D1D1F] font-bold tracking-tighter text-sm uppercase opacity-60">
                                     Rock-100xmag
                               </span>
