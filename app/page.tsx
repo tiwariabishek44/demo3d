@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import ScrollTextLayers from "@/components/ScrollTextLayers";
 import SequenceCanvas from "@/components/SequenceCanvas";
 import ProductGrid from "@/components/ProductGrid";
+import Footer from "@/components/Footer";
 import ScrollIndicator from "@/components/ScrollIndicator";
 
 export default function Home() {
@@ -134,6 +135,7 @@ export default function Home() {
       </div>
 
       <ProductGrid />
+      <Footer />
     </main>
   );
 }

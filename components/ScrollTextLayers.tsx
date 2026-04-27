@@ -16,8 +16,8 @@ export default function ScrollTextLayers({ scrollTargetRef }: ScrollTextLayersPr
       // Engineering starts after a small delay so the canvas has a beat of breathing room
       // as the dedicated hero scrolls off; fade windows are tightened (0.03 wide instead of
       // 0.05) so transitions between beats feel snappier.
-      const opacityEngineering = useTransform(scrollYProgress, [0.0, 0.03, 0.27, 0.3], [0, 1, 1, 0]);
-      const yEngineering = useTransform(scrollYProgress, [0.0, 0.03], [50, 0]);
+      const opacityEngineering = useTransform(scrollYProgress, [0.0, 0.01, 0.27, 0.3], [0, 1, 1, 0]);
+      const yEngineering = useTransform(scrollYProgress, [0.0, 0.01], [50, 0]);
       // Headline color settles from a clearly-readable gray into near-black, so the slogan
       // softens its entrance without becoming invisible against the canvas background.
       const colorEngineering = useTransform(scrollYProgress, [0.0, 0.12], ["#6E6E73", "#1D1D1F"]);
