@@ -7,9 +7,8 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.app',
+  title: 'Rock Tech — Premium Audio & Accessories',
+  description: 'Shop Rock Tech\'s lineup of wireless headphones, earbuds, smartwatches, power banks, chargers, and cables. Premium build quality at honest prices.',
   icons: {
     icon: [
       {
